@@ -43,6 +43,9 @@ export default function LoginPage() {
     const { error } = await supabase.auth.signUp({
       email,
       password,
+      options: {
+        emailRedirectTo: `${window.location.origin}/auth/callback`,
+      },
     });
 
     if (error) {
@@ -112,7 +115,7 @@ export default function LoginPage() {
           <button
             type="submit"
             disabled={loading}
-            className="w-full rounded-md bg-foreground px-3 py-2 text-sm font-medium text-background hover:bg-foreground/90 disabled:opacity-50"
+            className="w-full rounded-md bg-foreground px-4 py-3 text-sm font-medium text-background hover:bg-foreground/90 disabled:opacity-50 sm:py-2"
           >
             {loading ? "処理中..." : "ログイン"}
           </button>
@@ -121,7 +124,7 @@ export default function LoginPage() {
             type="button"
             onClick={handleSignUp}
             disabled={loading}
-            className="w-full rounded-md border border-foreground/20 px-3 py-2 text-sm font-medium text-foreground hover:bg-foreground/5 disabled:opacity-50"
+            className="w-full rounded-md border border-foreground/20 px-4 py-3 text-sm font-medium text-foreground hover:bg-foreground/5 disabled:opacity-50 sm:py-2"
           >
             新規登録
           </button>
