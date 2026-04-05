@@ -32,8 +32,11 @@ export default function LoginPage() {
     router.refresh();
   }
 
-  async function handleSignUp(e: React.MouseEvent) {
-    e.preventDefault();
+  async function handleSignUp() {
+    if (!email || !password || password.length < 6) {
+      setError("メールアドレスと6文字以上のパスワードを入力してください。");
+      return;
+    }
     setError("");
     setLoading(true);
 
