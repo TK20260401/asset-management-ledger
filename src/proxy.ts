@@ -30,7 +30,23 @@ export async function proxy(request: NextRequest) {
   );
 
   // Refresh the session to keep it alive
-  await supabase.auth.getUser();
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+
+  // Redirect unauthenticated users to /login
+  const isLoginPage = request.nextUrl.pathname === "/login";
+  if (!user && !isLoginPage) {
+    const url = request.nextUrl.clone();
+    url.pathname = "/login";
+    return NextResponse.redirect(url);
+  }
+  // Redirect authenticated users away from /login
+  if (user && isLoginPage) {
+    const url = request.nextUrl.clone();
+    url.pathname = "/";
+    return NextResponse.redirect(url);
+  }
 
   return supabaseResponse;
 }
