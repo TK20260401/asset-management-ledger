@@ -28,6 +28,14 @@
 | デプロイ | Vercel (プレビュー＋本番) |
 | 認証 | Supabase Auth |
 
+## 開発
+
+```bash
+npm run dev
+```
+
+[http://localhost:3000](http://localhost:3000) を開いて確認。
+
 ## DB設計
 
 詳細は [docs/database-design.md](docs/database-design.md) を参照。
